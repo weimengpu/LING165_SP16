@@ -72,8 +72,8 @@ if __name__ == '__main__':
             if not w in dh:
                 dh[w] = 0.0
 
-            listProbSpam.append((ds[w] + 1.0) / (dd1 + len(vocab)))
-            listProbHam.append((dh[w] + 1.0) / (dd0 + len(vocab)))
+            listProbSpam.append((ds[w] + 1.0) / (dd1 + 1.0 + len(ds)))
+            listProbHam.append((dh[w] + 1.0) / (dd0 + 1.0 + len(dh)))
 
         finalProbSpam = pprobSpam
         finalProbHam = pprobHam
@@ -103,3 +103,9 @@ if __name__ == '__main__':
     precision = TP / (TP + FP)
     recall = TP / (TP + FN)
     fScore = 2 * precision / (precision + recall)
+
+    print ("")
+    print 'Accuracy: ', accuracy
+    print 'Precision: ', precision
+    print 'Recall: ', recall
+    print 'FScore: ', fScore
