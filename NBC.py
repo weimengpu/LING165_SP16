@@ -67,21 +67,24 @@ if __name__ == '__main__':
         listProbSpam = []
         listProbHam = []
         for w in b:
-            if not w in ds:
-                ds[w] = 0.0
-            if not w in dh:
-                dh[w] = 0.0
+            #if not w in ds:
+               # ds[w] = 0.0
+            #if not w in dh:
+                #dh[w] = 0.0
 
-            listProbSpam.append((ds[w] + 1.0) / (dd1 + 1.0 + len(ds)))
-            listProbHam.append((dh[w] + 1.0) / (dd0 + 1.0 + len(dh)))
+            sc = ds.get(w, 0.0)
+            hc = dh.get(w, 0.0)
 
-        finalProbSpam = pprobSpam
-        finalProbHam = pprobHam
+            listProbSpam.append((sc + 1.0) / (dd1 + 1.0 + len(ds))) #listProbSpam.append((ds[w] + 1.0) / (dd1 + len(ds)))
+            listProbHam.append((hc + 1.0) / (dd0 + 1.0 + len(dh))) #listProbHam.append((dh[w] + 1.0) / (dd0 + len(dh)))
+
+        finalProbSpam = math.log(pprobSpam) #finalProbSpam = pprobSpam
+        finalProbHam = math.log(pprobHam) #finalProbHam = pprobHam
 
         for final1 in listProbSpam:
-            finalProbSpam *= math.pow(final1, l.count(w))
+            finalProbSpam += math.log(final1)#finalProbSpam *= math.pow(final1, l.count(w))
         for final0 in listProbHam:
-            finalProbHam *= math.pow(final0, l.count(w))
+            finalProbHam += math.log(final0) #finalProbHam *= math.pow(final0, l.count(w))
 
         predictedLabel = 2
         if finalProbSpam >= finalProbHam:
