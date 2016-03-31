@@ -1,4 +1,4 @@
-import random, sys
+import random
 
 
 # (Aux) Pad sentences. -> DONE!
@@ -12,6 +12,7 @@ def pad(n, line):
     out = '<s> ' * (n - 1)
     out += line.strip()
     out += ' </s>'
+
     return out
 
 
@@ -21,12 +22,16 @@ def update_ngram_dictionary(n, line, d):
     line = pad(n, line)
     # 2. Extract and store n-grams.
     words = line.split()
+
     for i in range(0, len(words) - (n - 1)):
+
         ngram = words[i: i + n]
         prefix = ' '.join(ngram[:-1])  # a string made of first n-1 words
         word = ngram[-1]  # the last word
+
         if not prefix in d: d[prefix] = []
         d[prefix].append(word)
+
     return d
 
 
@@ -36,23 +41,33 @@ def gen(n, d):
     prefix = '<s> ' * (n - 1)
     prefix = prefix.strip()
     last_word = ''
+
     while last_word != '</s>':
+
         word_list = d[prefix]
         last_word = random.choice(word_list)
         sent.append(last_word)
         ngram = prefix + ' ' + last_word
         suffix = ngram.split()[1:]
         prefix = ' '.join(suffix)
+
     sent = ' '.join(sent[:-1])
+
     return sent
 
 
 if __name__ == '__main__':
+
     n = input('N-gram: ')
     d = {}
     f = open('bullshit.txt', 'r')
+
     for line in f:
+
         d = update_ngram_dictionary(n, line, d)
+
     f.close()
+
     for i in range(10):
-        print gen(2, d)
+
+        print str(i) + ') ' + gen(n, d)
