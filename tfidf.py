@@ -30,4 +30,4 @@ for key, value in tf.items():
 score = sorted(score.items(), key=operator.itemgetter(1), reverse=True)
 
 for result in range(0, 10):
-    print score[result][0] + "\n"
+    print score[result][0] + "  " + str(score[result][1]) + "\n"
