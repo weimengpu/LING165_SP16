@@ -3,8 +3,10 @@ import glob
 
 vocab = (open('/Users/puweimeng/Downloads/vocab').read().splitlines())
 C = []
+r = []
 
-for text in glob.glob('/Users/puweimeng/Downloads/wsj100/**'):
+for text in sorted(glob.glob('/Users/puweimeng/Downloads/wsj100/WSJ_****')):
+    r.append(text)
     words = open(text).readline().split(' ')
     num = []
     for w in vocab:
@@ -28,5 +30,8 @@ q_50 = S_50.getI() * U_50.transpose() * q
 D_50 = S_50 * VT_50
 
 score = []
-for i in range(0, 50):
+for i in range(100):
     score.append((float(q_50.transpose() * D_50[:, i])) / (numpy.linalg.norm(q_50) * numpy.linalg.norm(D_50[:, i])))
+    
+for j in sorted(sorted(range(len(score)), key=lambda x: score[x])[-5:]):
+    print r[j].split("/")[-1]
