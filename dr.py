@@ -33,5 +33,5 @@ score = []
 for i in range(100):
     score.append((float(q_50.transpose() * D_50[:, i])) / (numpy.linalg.norm(q_50) * numpy.linalg.norm(D_50[:, i])))
     
-for j in sorted(sorted(range(len(score)), key=lambda x: score[x])[-5:]):
+for j in reversed(sorted(range(len(score)), key=lambda x: score[x])[-5:]):
     print r[j].split("/")[-1]
