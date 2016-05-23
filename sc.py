@@ -201,6 +201,6 @@ if __name__ == '__main__':
             acc += 1.0
         print '\t'.join([label, pred, line.strip()])
 
-    print "Accuracy: " + (acc/c)*100 + "%"
+    print "Accuracy: " + str((acc / c) * 100) + "%"
 
     f.close()
