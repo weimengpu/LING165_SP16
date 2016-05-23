@@ -13,6 +13,6 @@ Lab 5: Expectation-maximization (EM) algorithm to train a naive Bayes classifier
 
 Lab 6: Term Frequency – Inverse Document Frequency (tfidf.py)
 
-Lab 7: Document retrieval system using the ideas of vector space models and singular valuedecomposition (SVD) (dr.py)
+Lab 7: Document retrieval system using the ideas of vector space models and singular value decomposition (SVD) (dr.py)
 
 Lab 8: Moses
